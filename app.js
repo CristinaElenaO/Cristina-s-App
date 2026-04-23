@@ -55,6 +55,15 @@
     return `https://wa.me/${encodeURIComponent(normalizedPhone)}?text=${encodeURIComponent(message)}`;
   }
 
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+  }
+
   function renderReservations() {
     list.innerHTML = '';
     emptyState.hidden = reservations.length > 0;
@@ -71,8 +80,8 @@
         const sameDayReminderText = createReminderMessage(reservation, 0);
 
         li.innerHTML = `
-          <strong>${reservation.person}</strong>
-          <p class="meta">Phone: ${reservation.phone}</p>
+          <strong>${escapeHtml(reservation.person)}</strong>
+          <p class="meta">Phone: ${escapeHtml(reservation.phone)}</p>
           <p class="meta">Reservation: ${formatDate(reservation.reservationIso)}</p>
           <div class="reminders">
             <a class="whatsapp-link" target="_blank" rel="noopener noreferrer"
