@@ -44,7 +44,6 @@
   }
 
   function createReminderMessage(reservation, daysBefore) {
-    const reservationDate = new Date(reservation.reservationIso);
     const whenLabel = daysBefore === 1 ? 'tomorrow' : 'today';
 
     return `Hi ${reservation.person}! This is a reminder that your reservation is ${whenLabel} (${formatDate(reservation.reservationIso)}).`;
