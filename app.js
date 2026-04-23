@@ -21,7 +21,7 @@
     const reservationIso = new Date(reservationDate).toISOString();
 
     reservations.push({
-      id: crypto.randomUUID(),
+      id: generateId(),
       person,
       phone,
       reservationIso
@@ -31,6 +31,14 @@
     renderReservations();
     form.reset();
   });
+
+  function generateId() {
+    if (globalThis.crypto && typeof globalThis.crypto.randomUUID === 'function') {
+      return globalThis.crypto.randomUUID();
+    }
+
+    return `id-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  }
 
   function sanitizePhone(phone) {
     return phone.replace(/[^\d+]/g, '');
