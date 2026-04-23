@@ -84,11 +84,11 @@
           <p class="meta">Reservation: ${formatDate(reservation.reservationIso)}</p>
           <div class="reminders">
             <a class="whatsapp-link" target="_blank" rel="noopener noreferrer"
-              href="${buildWhatsAppLink(reservation.phone, dayBeforeReminderText)}">
+              href="${escapeHtml(buildWhatsAppLink(reservation.phone, dayBeforeReminderText))}">
               WhatsApp reminder (1 day before)
             </a>
             <a class="whatsapp-link" target="_blank" rel="noopener noreferrer"
-              href="${buildWhatsAppLink(reservation.phone, sameDayReminderText)}">
+              href="${escapeHtml(buildWhatsAppLink(reservation.phone, sameDayReminderText))}">
               WhatsApp reminder (same day)
             </a>
           </div>
