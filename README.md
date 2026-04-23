@@ -10,7 +10,7 @@ A lightweight mobile-friendly reservation planner.
   - The same day as the reservation
 
 ## How to use
-1. Open `/home/runner/work/Cristina-s-App/Cristina-s-App/index.html` in a browser.
+1. Open `index.html` in a browser (from the project folder).
 2. Add reservation details in the form.
 3. Use the WhatsApp buttons to open pre-filled reminder messages.
 
