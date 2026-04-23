@@ -45,15 +45,9 @@
 
   function createReminderMessage(reservation, daysBefore) {
     const reservationDate = new Date(reservation.reservationIso);
-    const reminderDate = new Date(reservationDate);
-    reminderDate.setDate(reminderDate.getDate() - daysBefore);
-
     const whenLabel = daysBefore === 1 ? 'tomorrow' : 'today';
 
-    return {
-      reminderDate,
-      text: `Hi ${reservation.person}! This is a reminder that your reservation is ${whenLabel} (${formatDate(reservation.reservationIso)}).`
-    };
+    return `Hi ${reservation.person}! This is a reminder that your reservation is ${whenLabel} (${formatDate(reservation.reservationIso)}).`;
   }
 
   function buildWhatsAppLink(phone, message) {
@@ -73,8 +67,8 @@
         const li = document.createElement('li');
         li.className = 'reservation';
 
-        const dayBeforeReminder = createReminderMessage(reservation, 1);
-        const sameDayReminder = createReminderMessage(reservation, 0);
+        const dayBeforeReminderText = createReminderMessage(reservation, 1);
+        const sameDayReminderText = createReminderMessage(reservation, 0);
 
         li.innerHTML = `
           <strong>${reservation.person}</strong>
@@ -82,11 +76,11 @@
           <p class="meta">Reservation: ${formatDate(reservation.reservationIso)}</p>
           <div class="reminders">
             <a class="whatsapp-link" target="_blank" rel="noopener noreferrer"
-              href="${buildWhatsAppLink(reservation.phone, `${dayBeforeReminder.text} Send on: ${formatDate(dayBeforeReminder.reminderDate.toISOString())}`)}">
+              href="${buildWhatsAppLink(reservation.phone, dayBeforeReminderText)}">
               WhatsApp reminder (1 day before)
             </a>
             <a class="whatsapp-link" target="_blank" rel="noopener noreferrer"
-              href="${buildWhatsAppLink(reservation.phone, `${sameDayReminder.text} Send on: ${formatDate(sameDayReminder.reminderDate.toISOString())}`)}">
+              href="${buildWhatsAppLink(reservation.phone, sameDayReminderText)}">
               WhatsApp reminder (same day)
             </a>
           </div>
